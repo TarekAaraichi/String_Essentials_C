@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "input_utils.h"
+#include "utility_functions.h"
 
 /*
  Uses "strchr" to find the first occurrence of a letter in a given text string. 
@@ -222,6 +223,150 @@ void checkPalindrome() {
     }
 }
 
+/* Which character is the most common
+    - input a string
+    - Example: Hello, what’s your name?
+    - The most common character is 'C', which appears 3 times
+
+    Tip – create int array[255] – i.e., one element per possible character??
+*/
+
+int findMostFrequentCharacter() {
+    char str[1000];  // Array to store the string (max 999 characters)
+
+    // Read a string from the user
+    printf("\nEnter a string: ");
+    fgets(str, sizeof(str), stdin);  // Read the entire line, including spaces
+
+    // Remove newline character (\n) if it exists at the end of the string
+    str[strcspn(str, "\n")] = 0;
+
+    // Call the function to find the most common character
+    findMostFrequentChar(str);
+
+    return 0;
+}
+
+/* Extract a part of a string
+    - input a string
+    - Example: Hello, how are you?
+    - Input a START position
+    - Input an END position
+
+    Print the part of the string between the two positions
+
+    Input> Hello there
+    Start> 3
+    End> 7
+    Between position 3 and 7 in the string, it reads:
+    'llo t'
+*/
+
+int extractSubstring() {
+    char str[1000];  // Array to store the string
+    int start, end;  // Variables for start and end positions
+
+    // Read the string
+    printf("\nEnter a string: ");
+    fgets(str, sizeof(str), stdin);  // Read the entire line, including spaces
+
+    // Remove newline character (\n) if it exists at the end of the string
+    str[strcspn(str, "\n")] = 0;
+
+    // Read start and end positions
+    printf("\nEnter a START position: ");
+    scanf("%d", &start);
+    
+    printf("Enter an END position: ");
+    scanf("%d", &end);
+
+    // Check that the start position is less than the end position and they are within string bounds
+    if (start >= 0 && end < strlen(str) && start <= end) {
+        // Print the part of the string between start and end
+        printf("\nBetween position %d and %d in the string, it reads:\n'%.*s'\n", start, end, end - start + 1, &str[start]); // Counting from 0
+        printf("\nBetween position %d and %d in the string, it reads:\n'%.*s'\n", start, end, end - start + 1, &str[start - 1]); // Counting from 1
+    } else {
+        // If start or end position is outside valid limits
+        printf("\nInvalid positions. Make sure start is less than or equal to end and they are within the string's length.\n");
+    }
+
+    return 0;
+}
+
+/* Swap the case of all characters
+    - input a string
+    - Example: Hello, How are you?
+
+    Print the string with reversed casing
+
+    Input> Hello, How are you?
+    Output> hELLO, hOW ARE YOU?
+*/
+
+#include <ctype.h>  // To use toupper() and tolower() functions
+
+int toggleCase() {
+    char str[1000];  // Array to store the string
+
+    // Read the string
+    printf("\nEnter a string: ");
+    fgets(str, sizeof(str), stdin);  // Read the entire line, including spaces
+
+    // Remove newline character (\n) if it exists at the end of the string
+    str[strcspn(str, "\n")] = 0;
+
+    // Loop through the string and print each character with reversed casing
+    printf("String with reversed casing: ");
+    for (int i = 0; str[i] != '\0'; i++) {
+        // If the character is lowercase, make it uppercase
+        if (islower(str[i])) {
+            putchar(toupper(str[i]));
+        }
+        // If the character is uppercase, make it lowercase
+        else if (isupper(str[i])) {
+            putchar(tolower(str[i]));
+        }
+        // If the character is not a letter (e.g., space), print it directly
+        else {
+            putchar(str[i]);
+        }
+    }
+    printf("\n");
+
+    return 0;
+}
+
+/* Remove all non-letter characters
+    - input a string
+    - call a function that removes all non-letter characters
+    int RemoveNotLetters(char *szOrig, char *szNew)
+    - print the new string
+
+    Input> Hello123”Bob”
+    Output> HelloBob
+*/
+
+int removeNonLetters() {
+    char szOrig[1000];  // Array to store the original string
+    char szNew[1000];   // Array to store the cleaned string
+
+    // Read the string
+    printf("\nEnter a string: ");
+    fgets(szOrig, sizeof(szOrig), stdin);  // Read the entire line, including spaces
+
+    // Remove newline character (\n) if it exists at the end of the string
+    szOrig[strcspn(szOrig, "\n")] = 0;
+
+    // Call the function to remove non-letters
+    RemoveNotLetters(szOrig, szNew);
+
+    // Print the new string
+    printf("String without non-letter characters: %s\n", szNew);
+
+    return 0;
+}
+
+
 /*
 Generates a random number between 1 and 6. 
 Then, ask the user if they want to continue (Yes, No).
@@ -320,6 +465,22 @@ int main() {
     // Check if a word or sentence is a palindrome
     printf("\n\t* Checking for a palindrome:\n");
     checkPalindrome(); // Call the function to check for palindrome
+
+    // Find the most frequent character
+    printf("\n\t* Finding the most frequent character:\n");
+    findMostFrequentCharacter(); // Call the function to find the most frequent character
+
+    // Extract a substring based on position
+    printf("\n\t* Extracting a substring:\n");
+    extractSubstring(); // Call the function to extract a substring
+
+    // Toggle case of each character
+    printf("\n\t* Toggling case for each character:\n");
+    toggleCase(); // Call the function to toggle case
+
+    // Remove non-letter characters from the text
+    printf("\n\t* Removing non-letter characters:\n");
+    removeNonLetters(); // Call the function to remove non-letter characters
 
     return 0;
 }

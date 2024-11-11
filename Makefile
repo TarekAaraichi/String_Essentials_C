@@ -1,5 +1,5 @@
 PROG = main.exe 
-SRC = main.c input_utils.c
+SRC = main.c input_utils.c utility_functions.c
 CFLAGS = -g
 LIBS =
 
