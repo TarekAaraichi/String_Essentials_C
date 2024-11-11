@@ -1,0 +1,11 @@
+{
+    "makefile.makePath": "C:\\msys64\\mingw64\\bin\\mingw32-make",
+    "makefile.makefilePath": ".\\Makefile",
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "c:\\Users\\rek_t\\Desktop\\Academic\\Nackademin\\C och C++\\Kursmaterial\\Codes\\Strings",
+            "binaryPath": "c:\\Users\\rek_t\\Desktop\\Academic\\Nackademin\\C och C++\\Kursmaterial\\Codes\\Strings\\main.exe",
+            "binaryArgs": []
+        }
+    ]
+}
